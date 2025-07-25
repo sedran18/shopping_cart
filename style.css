@@ -1,0 +1,46 @@
+*{
+    margin: 0px;
+    padding:0px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+main {
+    padding: 7% 7% 0 7%;
+    width :100%;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(45deg, grey, white);
+}
+.centro {
+    padding: 20px;
+    background: red;
+    height: 100vh;
+    width: 85%;
+    display: grid;
+    gap: 20px;
+    grid-template-rows: 0.5fr repeat(3, 1fr);
+    grid-template-columns: 3fr 1.3fr;
+    grid-template-areas: 
+    "titulo cart"
+    "menu cart"
+    "menu cart"
+    "menu cart";
+}
+.bloco {
+    background-color: green;
+
+}
+h2 {
+    grid-area: titulo;
+}
+.cart {
+    background: yellow;
+    grid-area: cart;
+}
+.menu {
+    grid-area: menu;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4%;
+}
