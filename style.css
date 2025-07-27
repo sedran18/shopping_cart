@@ -1,46 +1,317 @@
+:root {
+    --fonte: "Montserrat", sans-serif;
+    --fonte2:  "Open Sans", Arial, Helvetica, sans-serif
+}
 *{
     margin: 0px;
     padding:0px;
     box-sizing: border-box;
     font-size: 16px;
 }
+.carrossel {
+    display: flex;
+    justify-content: center;
+}
+.carrossel img{
+    width: 90%;
+    cursor: pointer;
+}
+header {
+    position: sticky;
+    height: 100px;
+    width:100%;
+    background: #111;
+    top:0;
+    left:0;
+    z-index: 2;
+    text-align: center;
+    overflow: hidden;
+}
+header img {
+    height: 90%;
+}
+
 main {
-    padding: 7% 7% 0 7%;
+    padding-top: 50px;
+    height: 1400px;
     width :100%;
     display: flex;
     justify-content: center;
-    background: linear-gradient(45deg, grey, white);
+    background: #fff;
+    background-size: cover;
+    
 }
 .centro {
+    height: 100%;
     padding: 20px;
-    background: red;
-    height: 100vh;
+    background-color: #ffffff;
     width: 85%;
     display: grid;
     gap: 20px;
-    grid-template-rows: 0.5fr repeat(3, 1fr);
+    grid-template-rows: 0.2fr repeat(3, 1fr);
     grid-template-columns: 3fr 1.3fr;
     grid-template-areas: 
     "titulo cart"
     "menu cart"
     "menu cart"
     "menu cart";
-}
-.bloco {
-    background-color: green;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
 }
+.bloco {
+    background-color: rgb(241, 235, 233);
+    text-align: center;
+    position: relative;
+    height: 90%;
+    border-radius: 10px;
+    font-family:  var(--fonte2);
+    font-size: 1.6rem;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.bloco:hover {
+    transform: scale(1.13);
+}
+.bloco img {
+    width:100%;
+    border-radius: 6px;
+
+}
+
+.comprar {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    width: 90%;
+    height: 40px;
+    background: #111;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background 0.3s;
+}
+
+.comprar:hover {
+    background: #555;
+}
+.quantidade {
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    width: 80%;
+    height: 40px;
+    background: #111;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    transition: background 0.3s;
+}
+
 h2 {
     grid-area: titulo;
+    font-size: 2rem;
+    font-family:  var(--fonte2);
+    color:#111;
+    text-shadow: 0px 0px black;
+    margin: 10px;
+    letter-spacing: 5px;
 }
-.cart {
-    background: yellow;
-    grid-area: cart;
+h2 i {
+    font-size: 3rem;
+    margin: 4px;
 }
+
 .menu {
     grid-area: menu;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 4%;
+}
+
+.mm {
+    color: #111;
+    border-radius: 50%;
+    border: 1px solid white;
+    display: flex;
+    height: 25px;
+    width: 25px;
+    background: #fafafa;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+.cart {
+    padding: 20px 10px;
+    grid-area: cart;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(43, 36, 36, 0.3);
+    background: #F0EEEB;
+
+    border-radius: 10px;
+    gap: 15px;
+}
+.cart h2 {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.aComprar {
+    overflow: auto;
+    height: 300px;
+    width: 90%;
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px;
+}
+.cep {
+    width: 90%;
+    font-family: var(--fonte2);
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cep input {
+    width: 100%;
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.frete {
+    font-size: 0.9rem;
+    margin-top: 8px;
+    background-color: #f7f7f7;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    display: none;
+    color: #333;
+}
+
+.cupom {
+    margin: 20px 0 50px;
+    width: 70%;
+    height: 30px;
+    border-radius: 1px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.preco {
+    font-family:  var(--fonte2);
+    font-size: 1rem;
+    color: #2c221e; 
+    margin: 7px 0px;
+}
+
+.cupom {
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.valor {
+    font-family: var(--fonte2);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2c221e;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.valor span#total {
+    font-size: 1.4rem;
+    color: black;
+    text-shadow: 1px 1px 0px #ccc;
+}
+.confirmar {
+    width: 90%;
+    height: 45px;
+    background-color: #111;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.confirmar:hover {
+    background-color: #6a006a;
+}
+.verificarLocal{
+    padding: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50%;
+    margin-bottom: 50px;
+    display: none;
+}
+
+
+footer {
+    height: 40vh;
+    width: 100%;
+}
+
+.almost {
+    height: 25%;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 1px 5px 1px rgba(128, 128, 128, 0.616);
+    margin: 10px 2px;
+    font-family: var(--fonte);
+}
+.almost img {
+    height: 95%;
+}
+.remover {
+    width:23px;
+    height:23px;
+    border-radius: 50%;
+    background: rgba(243, 8, 8, 0.938);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2%;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px 2px pink;
+
+}
+.remover i {
+    font-size: 0.7rem;
+}
+.preco {
+    font-weight: bold;
 }

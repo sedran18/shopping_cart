@@ -5,12 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping cart</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
+    <header>
+        <img src="images/logo.png" alt="logo">
+    </header>
+
     <main>
         <div class="centro">
-        <h2>Desserts</h2>
+        <h2><i class="fa-solid fa-earth-americas"></i>CAMISETAS</h2>
         <div class="cart">
+            <h2><i class="fa-solid fa-cart-shopping"></i>CART</h2>
+            <div class="aComprar" id="aComprar"></div>
+            <div class="cep">
+                <p>Informe seu cep</p>
+                <input type="number" id="cep">
+                <div class="frete" id="frete">
+                    <p>Para <span class="city">Caturama-BA</span></p>
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <span id="valorDoFrete">Valor: R$00,00</span>
+                </div>
+            </div>
+
+            <input type="text" placeholder="Insira seu cupom aqui" class="cupom" id="cupom">
+            <button class="verificarLocal"><i class="fa-solid fa-magnifying-glass"></i>Verificar CEP</button>
+            <div class="valor">
+                <span>Valor Total: </span>
+                <span id="total">00,00</span>
+            </div>
+            <button id="confirmar" class="confirmar">Confirmar</button>
         </div>
         <div class="menu" id="menu">
             <!--USe js para isso, coloque um objetos com foto, preço, url da imagem etc-->
@@ -18,6 +46,13 @@
         <div class="mais">
         </div>
     </main>
+
+    <section class="carrossel">
+        <img src="images/off.png" alt="foto">
+    </section>
+    <footer>
+
+    </footer>
     <script src="scripts/app.js"></script>
 </body>
 </html>
