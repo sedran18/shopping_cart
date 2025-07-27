@@ -7,6 +7,7 @@ fetch('./scripts/produtos.json')
     })
     .then(produtos => {
         for (let i = 0; i < produtos.length; i++) {
+            
             const produto = document.createElement('div');
             produto.setAttribute('id', `produto${i}`);
             produto.classList.add('bloco');
@@ -66,29 +67,31 @@ fetch('./scripts/produtos.json')
                     atualizarCarrinho();
                 });
 
-                document.getElementById(`menos${idDoObjeto}`).addEventListener('click', () => {
-                    if (quantos !== 1) {
-                        quantos--;
-                        atualizarCarrinho();
+                const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', () => {
+                    quantos--;
+                    if (quantos  === 0) {
+                        removerDoCarrinho();
+
                     } else {
-                        carrinhoIds.delete(idDoObjeto);
-                        divCarrinho.remove();
-                        item.classList.replace('quantidade', 'comprar');
-                          item.innerHTML = '<i class="fa-solid fa-cart-arrow-down"></i>ADICIONAR AO CARRINHO';
+                        atualizarCarrinho();
                     }
                 });
 
                 divCarrinho.querySelector('.remover').addEventListener('click', () => {
-                    carrinhoIds.delete(idDoObjeto);
-                    divCarrinho.remove();
-                    item.classList.replace('quantidade', 'comprar');
-                    item.innerHTML = '<i class="fa-solid fa-cart-arrow-down"></i>ADICIONAR AO CARRINHO';
+                    removerDoCarrinho();
                 });
 
                 function atualizarCarrinho() {
                     divCarrinho.querySelector('.qtd').textContent = quantos;
                     divCarrinho.querySelector('.preco').textContent = `R$${(quantos * objAtual.price).toFixed(2).replace('.', ',')}`;
                     document.getElementById(`num${item.id}`).textContent = quantos;
+                };
+
+                function removerDoCarrinho() {
+                    divCarrinho.remove();
+                    item.classList.replace('quantidade', 'comprar');
+                    item.innerHTML = '<i class="fa-solid fa-cart-arrow-down"></i>ADICIONAR AO CARRINHO';
+                    carrinhoIds.delete(Number(idDoObjeto));
                 }
             });
         }
