@@ -1,3 +1,6 @@
+import {calcularDistanciaEntreCeps} from './freteApi.js'
+
+
 const menu = document.getElementById('menu');
 
 fetch('./scripts/produtos.json')
@@ -62,12 +65,13 @@ fetch('./scripts/produtos.json')
 
                 aComprar.appendChild(divCarrinho);
 
-                document.getElementById(`mais${idDoObjeto}`).addEventListener('click', () => {
+                document.getElementById(`mais${idDoObjeto}`).addEventListener('click', (e) => {
                     quantos++;
                     atualizarCarrinho();
                 });
 
-                const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', () => {
+                const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', (e) => {
+                    e.stopPropagation();
                     quantos--;
                     if (quantos  === 0) {
                         removerDoCarrinho();
@@ -77,7 +81,8 @@ fetch('./scripts/produtos.json')
                     }
                 });
 
-                divCarrinho.querySelector('.remover').addEventListener('click', () => {
+                divCarrinho.querySelector('.remover').addEventListener('click', (e) => {
+                    e.stopPropagation();
                     removerDoCarrinho();
                 });
 
@@ -91,8 +96,53 @@ fetch('./scripts/produtos.json')
                     divCarrinho.remove();
                     item.classList.replace('quantidade', 'comprar');
                     item.innerHTML = '<i class="fa-solid fa-cart-arrow-down"></i>ADICIONAR AO CARRINHO';
-                    carrinhoIds.delete(Number(idDoObjeto));
+                    carrinhoIds.delete(idDoObjeto);
                 }
             });
         }
     });
+
+
+//Frete
+const inputCep = document.getElementById('cep');
+const verificarCEP = document.getElementById('verificarLocal')
+
+inputCep.addEventListener('keydown', () => verificarCEP.style.display = 'block');
+
+function removerBtDeVerificarCep() {
+    verificarCEP.style.display = 'none';
+}
+
+
+function validarCep(cep) {
+    if (/^\d{5}-\d{3}$/.test(cep))  {
+        return cep;
+    } else if (/^\d{8}$/.test(cep)) {
+        const outraStr = cep.slice(0, 5) + '-' + cep.slice(5);
+        return outraStr;
+    } else {
+        alert('Digite um CEP válido!')
+    }
+}
+
+
+verificarCEP.addEventListener('click', async () => {
+    const cepDigitado = inputCep.value;
+    const cepValidado = validarCep(cepDigitado);
+    if (!cepValidado) return;
+
+    const distSpan = document.getElementById('dist');
+
+    const distancia = await calcularDistanciaEntreCeps('46575-000', cepDigitado);
+    distSpan.textContent =  distancia;
+
+    const valorDoFrete = document.getElementById('valor');
+    valorDoFrete.textContent = (distancia * 0.02).toFixed(2).replace('.', ',');
+
+    //Aparecer tudo
+
+    const divDoFrete = document.getElementById('frete');
+    divDoFrete.style.display = 'block';
+})
+
+

@@ -24,16 +24,17 @@
             <div class="aComprar" id="aComprar"></div>
             <div class="cep">
                 <p>Informe seu cep</p>
-                <input type="number" id="cep">
+                <input type="text" id="cep">
+                <button class="verificarLocal" id="verificarLocal"><i class="fa-solid fa-magnifying-glass"></i>Verificar CEP</button>
+
                 <div class="frete" id="frete">
-                    <p>Para <span class="city">Caturama-BA</span></p>
+                    <p>Distância <span class="city" id="dist">0</span> km</p>
                     <i class="fa-solid fa-truck-fast"></i>
-                    <span id="valorDoFrete">Valor: R$00,00</span>
+                    <span id="valorDoFrete">Valor: R$<span id='valor'>00,00</span>
                 </div>
             </div>
 
             <input type="text" placeholder="Insira seu cupom aqui" class="cupom" id="cupom">
-            <button class="verificarLocal"><i class="fa-solid fa-magnifying-glass"></i>Verificar CEP</button>
             <div class="valor">
                 <span>Valor Total: </span>
                 <span id="total">00,00</span>
@@ -41,7 +42,7 @@
             <button id="confirmar" class="confirmar">Confirmar</button>
         </div>
         <div class="menu" id="menu">
-            <!--USe js para isso, coloque um objetos com foto, preço, url da imagem etc-->
+            <!--Use js para isso, coloque um objetos com foto, preço, url da imagem etc-->
         </div>
         <div class="mais">
         </div>
@@ -53,6 +54,6 @@
     <footer>
 
     </footer>
-    <script src="scripts/app.js"></script>
+    <script type="module" src="scripts/app.js"></script>
 </body>
 </html>
