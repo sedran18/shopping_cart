@@ -236,6 +236,7 @@ confirmar.addEventListener('click', (e) => {
             }
             const qntDeProdutos = produtosComprados.reduce((total, item) => total + item.quantidade, 0);
             alert(`Você comprou ${qntDeProdutos} produtos, total de R$${valorTotal.toFixed(2).replace('.',',')}`);
+            location.href='comprou.html'
         }
     } else {
         alert('Forneça o CEP')
