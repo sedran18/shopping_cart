@@ -1,7 +1,45 @@
-import {calcularDistanciaEntreCeps} from './freteApi.js'
+import {calcularDistanciaEntreCeps} from './freteApi.js';
+let valorTotal = 0;
+let total = document.getElementById('total');
+let desconto = false;
+let forneceuCep = false;
+let produtosComprados = [];
+
+const adicionarALista = (obj) => {
+    const index = produtosComprados.findIndex(item => item.id === obj.id);
+
+    if (index !== -1) {
+        produtosComprados[index].quantidade += 1;
+        produtosComprados[index].price += produtosComprados[index].price;
+    } else {
+        produtosComprados.push({ ...obj, quantidade: 1 });
+    }
+};
+
+const removerDaLista = (obj) =>  {
+    const index = produtosComprados.findIndex(item => item.id === obj.id);
+    if (index !== -1) {
+        if (produtosComprados[index].quantidade > 1) {
+            produtosComprados[index].quantidade -= 1;
+        } else {
+            produtosComprados.splice(index, 1);
+        }
+    }
+};
+
+function atualizarValorTotal(somarAoValor) {
+    if (valorTotal === 0) {
+        valorTotal = somarAoValor;
+    } else  {
+        valorTotal += somarAoValor
+    }
+    total.textContent = valorTotal.toFixed(2).replace('.', ',');
+}
+
 
 
 const menu = document.getElementById('menu');
+
 
 fetch('./scripts/produtos.json')
     .then(response => {
@@ -20,7 +58,7 @@ fetch('./scripts/produtos.json')
 
             const preco = document.createElement('div');
             preco.classList.add('preco');
-            preco.innerHTML = `R$${produtos[i].price.toFixed(2).replace('.', ',')}`;
+            preco.innerHTML = `R$${String(produtos[i].price.toFixed(2)).replace('.', ',')}`;
 
             const comprar = document.createElement('div');
             comprar.classList.add('comprar');
@@ -31,21 +69,24 @@ fetch('./scripts/produtos.json')
             produto.appendChild(preco);
             produto.appendChild(comprar);
             menu.appendChild(produto);
+
         }
 
         const comprar = document.getElementsByClassName('comprar');
         const aComprar = document.getElementById('aComprar');
         const carrinhoIds = new Set();
-
+        
         for (let item of comprar) {
             item.addEventListener('click', () => {
                 const itemId = item.parentNode.id;
                 const idDoObjeto = itemId.replace('produto', '');
+                
 
                 if (carrinhoIds.has(idDoObjeto)) return;
 
                 carrinhoIds.add(idDoObjeto);
                 const objAtual = produtos[idDoObjeto];
+                adicionarALista(objAtual);
                 let quantos = 1;
 
                 item.classList.replace('comprar', 'quantidade');
@@ -62,12 +103,15 @@ fetch('./scripts/produtos.json')
                     <span class="qtd">${quantos}</span>
                     <span class="preco">R$${(quantos * objAtual.price).toFixed(2).replace('.', ',')}</span>
                     <span class="remover" title="remover produto"><i class="fa-solid fa-trash"></i></span>`;
+                atualizarValorTotal(objAtual.price);
 
                 aComprar.appendChild(divCarrinho);
 
                 document.getElementById(`mais${idDoObjeto}`).addEventListener('click', (e) => {
                     quantos++;
                     atualizarCarrinho();
+                    atualizarValorTotal(objAtual.price);
+                    adicionarALista(objAtual);
                 });
 
                 const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', (e) => {
@@ -75,15 +119,21 @@ fetch('./scripts/produtos.json')
                     quantos--;
                     if (quantos  === 0) {
                         removerDoCarrinho();
+                        atualizarValorTotal(-objAtual.price);
+                        removerDaLista(objAtual);
 
                     } else {
                         atualizarCarrinho();
+                        atualizarValorTotal(-objAtual.price);
+                        removerDaLista(objAtual);
                     }
                 });
 
                 divCarrinho.querySelector('.remover').addEventListener('click', (e) => {
                     e.stopPropagation();
                     removerDoCarrinho();
+                    atualizarValorTotal(-objAtual.price);
+                    removerDaLista(objAtual);
                 });
 
                 function atualizarCarrinho() {
@@ -109,10 +159,6 @@ const verificarCEP = document.getElementById('verificarLocal')
 
 inputCep.addEventListener('keydown', () => verificarCEP.style.display = 'block');
 
-function removerBtDeVerificarCep() {
-    verificarCEP.style.display = 'none';
-}
-
 
 function validarCep(cep) {
     if (/^\d{5}-\d{3}$/.test(cep))  {
@@ -124,6 +170,7 @@ function validarCep(cep) {
         alert('Digite um CEP válido!')
     }
 }
+
 
 
 verificarCEP.addEventListener('click', async () => {
@@ -138,11 +185,56 @@ verificarCEP.addEventListener('click', async () => {
 
     const valorDoFrete = document.getElementById('valor');
     valorDoFrete.textContent = (distancia * 0.02).toFixed(2).replace('.', ',');
-
+    atualizarValorTotal(distancia * 0.02)
     //Aparecer tudo
 
     const divDoFrete = document.getElementById('frete');
     divDoFrete.style.display = 'block';
+    forneceuCep = true;
 })
 
+//Calcular cupom de desconto
+const cupons = ['SEDRAN', 'GABRIEL', 'NARDES']
 
+
+const enviarCupom = document.querySelector('#botaoLupa');
+
+enviarCupom.addEventListener('click', (e) => {
+    if (valorTotal === 0)  {
+        alert('Escolha o produto primeiro');
+        desconto = true;
+        return;
+    } 
+    const inputCupom = document.querySelector('#cupom');
+    const valorCupom = inputCupom.value.toUpperCase();
+    if (!valorCupom) return;
+    if(cupons.includes(valorCupom)) {
+        // valorTotal *= 0.8
+        document.querySelector('.showCupom').style.display = 'flex';
+        const nomeDoCupom = document.getElementById('nomeDoCupom');
+        nomeDoCupom.textContent = valorCupom;
+    } else {
+        alert('Cupom Inválido')
+    }
+});
+
+
+//Calcular o valor total
+//Quando clicar no bt de confirmar
+const confirmar = document.getElementById('confirmar');
+confirmar.addEventListener('click', (e) => {
+    if (forneceuCep) {
+        if (produtosComprados.length === 0) {
+            alert('Compre algum produto');
+        } else {
+            if (desconto) {
+                valorTotal *= 0.8;    
+            }
+            const qntDeProdutos = produtosComprados.reduce((total, item) => total + item.quantidade, 0);
+            alert(`Você comprou ${qntDeProdutos} produtos, total de R$${valorTotal.toFixed(2).replace('.', ',')}`);
+        }
+    } else {
+        alert('Forneça o CEP')
+    }
+    
+})
