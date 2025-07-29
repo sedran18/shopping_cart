@@ -29,7 +29,7 @@ const removerDaLista = (obj) =>  {
 
 
 function atualizarValorTotal(somarAoValor) {
-    valorTotal += somarAoValor; // Apenas acumula o valor
+    valorTotal += somarAoValor;
     total.textContent = valorTotal.toFixed(2).replace('.', ',');
 }
 
@@ -112,19 +112,27 @@ fetch('./scripts/produtos.json')
                 });
 
                 const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    quantos--;
-
-                    if (quantos === 0) {
-                        removerDoCarrinho();
+                        e.stopPropagation();
+                        quantos--;
+                        
+                        // Subtrai o valor da unidade que foi removida.
                         atualizarValorTotal(-objAtual.price);
-                        removerDaLista(objAtual);
-
-                    } else {
-                        atualizarCarrinho();
-                        atualizarValorTotal(-objAtual.price);
-                        removerDaLista(objAtual); // Aqui a função apenas decrementa a quantidade
-                    }
+                        
+                        // Atualiza a lista de dados (produtosComprados).
+                        removerDaLista(objAtual); 
+                        
+                        if (quantos === 0) {
+                            removerDoCarrinho(); // Remove o item da tela.
+                        } else {
+                            atualizarCarrinho(); // Apenas atualiza a quantidade na tela.
+                        }
+                        
+                        // VERIFICAÇÃO FINAL E CORRETA:
+                        // Se o array de produtos (o carrinho todo) estiver vazio, AÍ SIM zeramos o total.
+                        if (produtosComprados.length === 0) {
+                            valorTotal = 0;
+                            total.textContent = '0,00';
+                        }
                 });
 
                divCarrinho.querySelector('.remover').addEventListener('click', (e) => {
