@@ -1,40 +1,47 @@
-# 🛒 Shopping Cart
+🛒 SweetCart – Carrinho de Compras
+Este é um projeto simples e responsivo de carrinho de compras online, desenvolvido com HTML, CSS e JavaScript puro, com foco em aprendizado prático de lógica de programação, manipulação do DOM e integração assíncrona via fetch.
 
-Este é um projeto simples de carrinho de compras online, feito com **HTML, CSS e JavaScript puro**, com o objetivo de consolidar aprendizados em lógica, manipulação de DOM e integração com `fetch`.
+⚠️ Aviso: todos os produtos exibidos são fictícios, criados apenas para fins educacionais. As imagens foram geradas com auxílio de inteligência artificial.
 
-> **⚠️ Aviso:** Todos os produtos exibidos são fictícios e gerados apenas para fins de estudo. As imagens foram criadas com auxílio de inteligência artificial.
+🚀 Funcionalidades
+✅ Listagem de produtos com imagem, nome e preço
 
-## 🚀 Funcionalidades
+➕ Adição e remoção dinâmica de produtos no carrinho
 
-- Listagem de produtos com imagens e preços
-- Adição e remoção de produtos no carrinho
-- Cálculo automático do total
+🧮 Cálculo automático do total
 
-## 🧠 Aprendizados
+🛍️ Confirmação de pedido simulada
 
-Durante o desenvolvimento deste projeto, aprendi:
+♻️ Mensagem de entrega com neutralização de carbono
 
-- Como utilizar `fetch` para carregar dados externos
-- A aplicar `async/await` de forma prática
-- Manipular DOM e eventos de forma mais dinâmica
+📚 Aprendizados
+Durante o desenvolvimento, aprendi e apliquei:
 
+Uso de fetch com async/await para consumir arquivos externos
 
-## 📌 Pontos de melhoria
+Manipulação de elementos do DOM com eventos
 
-Este foi meu **segundo projeto prático**, e percebo que **falta de planejamento prévio** impactou a organização geral. Nos próximos, pretendo:
+Organização básica de código JS e fluxo de estados
 
-- Planejar melhor o layout e fluxo do usuário
-- Refatorar funções grandes e quebrar melhor a lógica
-- Aplicar boas práticas de organização de pastas e código
+Simulação de um carrinho de compras com interação real
 
-## 🧪 Tecnologias
+📌 Pontos de melhoria
+Este foi meu segundo projeto prático e, com ele, percebi que:
 
-- HTML5
-- CSS3
-- JavaScript (ES6+)
-- Git + GitHub Pages
-- Node.js
+Faltei com planejamento prévio, o que dificultou a organização
 
-## 🔗 Acesse o projeto online
+Algumas funções ficaram grandes e poderiam ser melhor divididas
 
-👉 [https://sedran18.github.io/shopping_cart](https://sedran18.github.io/shopping_cart)
+A estrutura de arquivos e lógica pode ser mais modular no futuro
+
+Pretendo levar esses aprendizados para meus próximos projetos, com foco em escalabilidade e boas práticas.
+
+🧪 Tecnologias
+HTML5 + CSS3
+
+JavaScript (ES6+)
+
+Git e GitHub Pages
+
+🔗 Acesse o projeto
+👉 Deploy via GitHub Pages
