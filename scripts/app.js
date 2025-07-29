@@ -23,12 +23,14 @@ const removerDaLista = (obj) =>  {
             produtosComprados[index].quantidade -= 1;
         } else {
             produtosComprados.splice(index, 1);
+            atualizarValorTotal(0);
         }
+        
     }
 };
 
 function atualizarValorTotal(somarAoValor) {
-    if (valorTotal === 0) {
+    if (valorTotal === 0 || somarAoValor === 0) {
         valorTotal = somarAoValor;
     } else  {
         valorTotal += somarAoValor
