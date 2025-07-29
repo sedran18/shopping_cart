@@ -174,23 +174,26 @@ function validarCep(cep) {
 
 
 verificarCEP.addEventListener('click', async () => {
-    const cepDigitado = inputCep.value;
-    const cepValidado = validarCep(cepDigitado);
-    if (!cepValidado) return;
+    if (!forneceuCep) {
+        const cepDigitado = inputCep.value;
+        const cepValidado = validarCep(cepDigitado);
+        if (!cepValidado) return;
 
-    const distSpan = document.getElementById('dist');
+        const distSpan = document.getElementById('dist');
 
-    const distancia = await calcularDistanciaEntreCeps('46575-000', cepDigitado);
-    distSpan.textContent =  distancia;
+        const distancia = await calcularDistanciaEntreCeps('46575-000', cepDigitado);
+        distSpan.textContent =  distancia;
 
-    const valorDoFrete = document.getElementById('valor');
-    valorDoFrete.textContent = (distancia * 0.02).toFixed(2).replace('.', ',');
-    atualizarValorTotal(distancia * 0.02)
-    //Aparecer tudo
+        const valorDoFrete = document.getElementById('valor');
+        valorDoFrete.textContent = (distancia * 0.02).toFixed(2).replace('.', ',');
+        atualizarValorTotal(distancia * 0.02)
+        //Aparecer tudo
 
-    const divDoFrete = document.getElementById('frete');
-    divDoFrete.style.display = 'block';
-    forneceuCep = true;
+        const divDoFrete = document.getElementById('frete');
+        divDoFrete.style.display = 'block';
+        forneceuCep = true;
+    }
+    
 })
 
 //Calcular cupom de desconto
@@ -202,20 +205,21 @@ const enviarCupom = document.querySelector('#botaoLupa');
 enviarCupom.addEventListener('click', (e) => {
     if (valorTotal === 0)  {
         alert('Escolha o produto primeiro');
-        desconto = true;
         return;
     } 
-    const inputCupom = document.querySelector('#cupom');
-    const valorCupom = inputCupom.value.toUpperCase();
-    if (!valorCupom) return;
-    if(cupons.includes(valorCupom)) {
-        // valorTotal *= 0.8
-        document.querySelector('.showCupom').style.display = 'flex';
-        const nomeDoCupom = document.getElementById('nomeDoCupom');
-        nomeDoCupom.textContent = valorCupom;
-    } else {
-        alert('Cupom Inválido')
-    }
+    if (!desconto) {
+        const inputCupom = document.querySelector('#cupom');
+        const valorCupom = inputCupom.value.toUpperCase();
+        if (!valorCupom) return;
+        if(cupons.includes(valorCupom)) {
+            desconto = true;
+            document.querySelector('.showCupom').style.display = 'flex';
+            const nomeDoCupom = document.getElementById('nomeDoCupom');
+            nomeDoCupom.textContent = valorCupom;
+        } else {
+            alert('Cupom Inválido')
+        }
+}
 });
 
 
@@ -231,12 +235,10 @@ confirmar.addEventListener('click', (e) => {
                 valorTotal *= 0.8;    
             }
             const qntDeProdutos = produtosComprados.reduce((total, item) => total + item.quantidade, 0);
-            alert(`Você comprou ${qntDeProdutos} produtos, total de R$${valorTotal.toFixed(2).replace('.', ',')}`);
+            alert(`Você comprou ${qntDeProdutos} produtos, total de R$${valorTotal.toFixed(2).replace('.',',')}`);
         }
     } else {
         alert('Forneça o CEP')
     }
-    
-    const imagens = document.getElementById('imagens');
     
 })
