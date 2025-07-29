@@ -501,3 +501,96 @@ h2 i {
     background-color: #555;
     transform: translateY(-3px);
 }
+
+
+/* =================================================================== */
+/* =================== CÓDIGO RESPONSIVO COMPLETO ==================== */
+/* =================================================================== */
+
+
+/* ==================================================== */
+/* 1. AJUSTE PARA TELAS MÉDIAS (EX: TABLETS EM PÉ)      */
+/* Breakpoint em 1024px                             */
+/* ==================================================== */
+@media (max-width: 1024px) {
+    
+    /* A MUDANÇA-CHAVE: Passamos o grid de produtos de 3 para 2 colunas.
+       Isso dá mais ar para cada bloco e impede que o botão quebre o layout. */
+    .menu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px; /* Um pouco mais de espaço entre os blocos */
+    }
+
+    /* Ajustamos o container principal para ele não ficar tão largo */
+    .centro {
+        width: 90%;
+        /* Mantém as 2 colunas principais (menu | carrinho) */
+        grid-template-columns: 2.5fr 1.5fr; 
+    }
+
+    /* Damos um pouco mais de espaço para o texto dentro do botão */
+    .comprar, .quantidade {
+       padding: 12px 8px; /* Mais preenchimento vertical, menos horizontal */
+       font-size: 0.75rem; /* Ajuste fino no tamanho da fonte */
+       height: auto; /* Altura automática para caso o texto precise quebrar */
+       min-height: 40px; /* Garante uma altura mínima para o toque */
+    }
+}
+
+
+/* ==================================================== */
+/* 2. AJUSTE PARA TELAS PEQUENAS (CELULARES)            */
+/* Breakpoint em 768px                              */
+/* ==================================================== */
+@media (max-width: 768px) {
+
+    /* --- Ajustes Gerais --- */
+    main {
+        padding: 20px 0;
+    }
+
+    /* --- Layout Principal --- */
+    .centro {
+        width: 95%; 
+        grid-template-columns: 1fr; /* Muda para uma única coluna */
+        grid-template-areas:
+            "titulo" 
+            "menu"   
+            "cart";  /* Carrinho vai para baixo dos produtos */
+        grid-template-rows: auto auto auto;
+        gap: 40px; 
+    }
+
+    /* --- Títulos --- */
+    h2 {
+        font-size: 1.8rem;
+        text-align: center;
+        letter-spacing: 3px;
+    }
+
+    h2 i {
+        font-size: 2.5rem;
+    }
+
+    /* --- Grid de Produtos --- */
+    .menu {
+        /* Agora a grade de produtos também vira uma coluna única,
+           dando foco total a cada item. */
+        grid-template-columns: 1fr;
+        gap: 30px; 
+    }
+
+    /* Remove o efeito de zoom ao tocar */
+    .bloco:hover {
+        transform: none;
+    }
+
+    /* --- Itens no carrinho --- */
+    .almost {
+        height: 80px;
+    }
+    
+    .footer-container {
+        width: 90%;
+    }
+}
