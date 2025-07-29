@@ -21,16 +21,19 @@ const removerDaLista = (obj) =>  {
             produtosComprados[index].quantidade -= 1;
         } else {
             produtosComprados.splice(index, 1);
+            atualizarValorTotal(0);
         }
+        
     }
 };
 
-function atualizarValorTotal() {
-    const totalProdutos = produtosComprados.reduce((acc, item) => {
-        return acc + (item.price * item.quantidade);
-    }, 0);
 
-    valorTotal = totalProdutos; 
+function atualizarValorTotal(somarAoValor) {
+    if (valorTotal === 0 || somarAoValor === 0) {
+        valorTotal = somarAoValor;
+    } else  {
+        valorTotal += somarAoValor
+    }
     total.textContent = valorTotal.toFixed(2).replace('.', ',');
 }
 
