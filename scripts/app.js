@@ -237,4 +237,6 @@ confirmar.addEventListener('click', (e) => {
         alert('Forneça o CEP')
     }
     
+    const imagens = document.getElementById('imagens');
+    
 })
