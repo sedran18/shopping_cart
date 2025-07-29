@@ -1,4 +1,4 @@
-# SweetCart – Carrinho de Compras Online
+# Carrinho de Compras Online
 
 Este é um projeto simples e responsivo de carrinho de compras online, desenvolvido com **HTML, CSS e JavaScript puro**. O objetivo principal foi aprofundar meus conhecimentos em lógica de programação, manipulação do DOM e integração assíncrona via `fetch`.
 
