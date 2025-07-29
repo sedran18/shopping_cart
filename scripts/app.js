@@ -7,10 +7,8 @@ let produtosComprados = [];
 
 const adicionarALista = (obj) => {
     const index = produtosComprados.findIndex(item => item.id === obj.id);
-
     if (index !== -1) {
-        produtosComprados[index].quantidade += 1;
-        produtosComprados[index].price += produtosComprados[index].price;
+        produtosComprados[index].quantidade++;
     } else {
         produtosComprados.push({ ...obj, quantidade: 1 });
     }
@@ -27,12 +25,12 @@ const removerDaLista = (obj) =>  {
     }
 };
 
-function atualizarValorTotal(somarAoValor) {
-    if (valorTotal === 0) {
-        valorTotal = somarAoValor;
-    } else  {
-        valorTotal += somarAoValor
-    }
+function atualizarValorTotal() {
+    const totalProdutos = produtosComprados.reduce((acc, item) => {
+        return acc + (item.price * item.quantidade);
+    }, 0);
+
+    valorTotal = totalProdutos; 
     total.textContent = valorTotal.toFixed(2).replace('.', ',');
 }
 
