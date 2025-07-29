@@ -1,3 +1,5 @@
+//ARQUIVO OBSOLETO
+
 const fs = require('fs');
 
 const produtos = [];
