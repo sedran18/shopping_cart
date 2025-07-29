@@ -1,47 +1,51 @@
-🛒 SweetCart – Carrinho de Compras
-Este é um projeto simples e responsivo de carrinho de compras online, desenvolvido com HTML, CSS e JavaScript puro, com foco em aprendizado prático de lógica de programação, manipulação do DOM e integração assíncrona via fetch.
+# SweetCart – Carrinho de Compras Online
 
-⚠️ Aviso: todos os produtos exibidos são fictícios, criados apenas para fins educacionais. As imagens foram geradas com auxílio de inteligência artificial.
+Este é um projeto simples e responsivo de carrinho de compras online, desenvolvido com **HTML, CSS e JavaScript puro**. O objetivo principal foi aprofundar meus conhecimentos em lógica de programação, manipulação do DOM e integração assíncrona via `fetch`.
 
-🚀 Funcionalidades
-✅ Listagem de produtos com imagem, nome e preço
+## 🚀 Funcionalidades
 
-➕ Adição e remoção dinâmica de produtos no carrinho
+- Listagem dinâmica de produtos com imagem, nome e preço;
+- Adição e remoção de produtos no carrinho de forma interativa;
+- Cálculo automático do total do pedido;
+- Simulação de confirmação do pedido;
 
-🧮 Cálculo automático do total
 
-🛍️ Confirmação de pedido simulada
+## 📚 Aprendizados e Tecnologias
 
-♻️ Mensagem de entrega com neutralização de carbono
+Durante o desenvolvimento, apliquei e aprendi:
 
-📚 Aprendizados
-Durante o desenvolvimento, aprendi e apliquei:
+- Consumo de arquivos JSON via fetch com async/await;
+- Manipulação dinâmica do DOM com eventos em JavaScript;
+- Organização básica do fluxo de estados do aplicativo;
+- Simulação de um carrinho de compras com interações reais.
 
-Uso de fetch com async/await para consumir arquivos externos
+### Tecnologias utilizadas
 
-Manipulação de elementos do DOM com eventos
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Git e GitHub Pages para deploy
 
-Organização básica de código JS e fluxo de estados
+## 📌 Pontos de melhoria
 
-Simulação de um carrinho de compras com interação real
+- Melhor planejamento prévio para organização do código;
+- Modularização do JavaScript para funções menores e mais reutilizáveis;
+- Estruturação de arquivos para facilitar manutenção e escalabilidade.
 
-📌 Pontos de melhoria
-Este foi meu segundo projeto prático e, com ele, percebi que:
+## 🔗 Deploy
 
-Faltei com planejamento prévio, o que dificultou a organização
+O projeto está disponível em: [https://sedran18.github.io/shopping_cart]
 
-Algumas funções ficaram grandes e poderiam ser melhor divididas
+## 🎨 Inspiração
 
-A estrutura de arquivos e lógica pode ser mais modular no futuro
+Este projeto foi inspirado no desafio de front-end do [Frontend Mentor](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d), uma ótima plataforma para aprimorar habilidades de desenvolvimento web com desafios reais.
 
-Pretendo levar esses aprendizados para meus próximos projetos, com foco em escalabilidade e boas práticas.
+---
 
-🧪 Tecnologias
-HTML5 + CSS3
+## Aviso
 
-JavaScript (ES6+)
+Todos os produtos exibidos são fictícios e criados para fins educacionais. As imagens foram geradas com auxílio de inteligência artificial.
 
-Git e GitHub Pages
+---
 
-🔗 Acesse o projeto
-👉 Deploy via GitHub Pages
+Agradeço a todos que acompanham meu aprendizado! 🙌
