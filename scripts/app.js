@@ -29,11 +29,7 @@ const removerDaLista = (obj) =>  {
 
 
 function atualizarValorTotal(somarAoValor) {
-    if (valorTotal === 0 || somarAoValor === 0) {
-        valorTotal = somarAoValor;
-    } else  {
-        valorTotal += somarAoValor
-    }
+    valorTotal += somarAoValor; // Apenas acumula o valor
     total.textContent = valorTotal.toFixed(2).replace('.', ',');
 }
 
@@ -118,7 +114,8 @@ fetch('./scripts/produtos.json')
                 const btDeMenos = document.getElementById(`menos${idDoObjeto}`).addEventListener('click', (e) => {
                     e.stopPropagation();
                     quantos--;
-                    if (quantos  === 0) {
+
+                    if (quantos === 0) {
                         removerDoCarrinho();
                         atualizarValorTotal(-objAtual.price);
                         removerDaLista(objAtual);
@@ -126,16 +123,31 @@ fetch('./scripts/produtos.json')
                     } else {
                         atualizarCarrinho();
                         atualizarValorTotal(-objAtual.price);
-                        removerDaLista(objAtual);
+                        removerDaLista(objAtual); // Aqui a função apenas decrementa a quantidade
                     }
                 });
 
-                divCarrinho.querySelector('.remover').addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    removerDoCarrinho();
-                    atualizarValorTotal(-objAtual.price);
-                    removerDaLista(objAtual);
-                });
+               divCarrinho.querySelector('.remover').addEventListener('click', (e) => {
+    e.stopPropagation();
+
+    // CORREÇÃO DO BUG PRINCIPAL: Descobrir o valor total do item a ser removido
+    const itemSendoRemovido = produtosComprados.find(item => item.id === objAtual.id);
+    if (itemSendoRemovido) {
+        const valorTotalDoItem = itemSendoRemovido.price * itemSendoRemovido.quantidade;
+        atualizarValorTotal(-valorTotalDoItem); // Subtrai o valor correto
+    }
+    
+    removerDoCarrinho();
+
+    // Remove TODAS as instâncias desse item da lista de dados
+    produtosComprados = produtosComprados.filter(item => item.id !== objAtual.id);
+    
+    // GARANTIA DE ZERAR: Se o carrinho ficou vazio após a remoção, zere o total.
+    if (produtosComprados.length === 0) {
+        valorTotal = 0;
+        total.textContent = '0,00'; // Força a exibição para "0,00"
+    }
+});
 
                 function atualizarCarrinho() {
                     divCarrinho.querySelector('.qtd').textContent = quantos;
